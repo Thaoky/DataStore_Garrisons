@@ -1,8 +1,6 @@
 if not DataStore then return end
 
-local addonName = "DataStore_Garrisons"
-local addon = _G[addonName]
-local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
+local addonName, addon = ...
 
 function addon:SetupOptions()
 	local f = DataStore.Frames.GarrisonsOptions
@@ -10,13 +8,17 @@ function addon:SetupOptions()
 	DataStore:AddOptionCategory(f, addonName, "DataStore")
 
 	-- localize options
+	local L = DataStore:GetLocale(addonName)
+	
 	DataStoreGarrisonsOptions_SliderReportLevel.tooltipText = L["REPORT_LEVEL_TOOLTIP"]
 	DataStoreGarrisonsOptions_SliderReportLevelLow:SetText("350")
 	DataStoreGarrisonsOptions_SliderReportLevelHigh:SetText("975")
 	
 	-- restore saved options to gui
-	local value = DataStore:GetOption(addonName, "ReportLevel")
-	DataStoreGarrisonsOptions_SliderReportLevel:SetValue(value)
-	DataStoreGarrisonsOptions_SliderReportLevelText:SetText(format(L["REPORT_LEVEL_LABEL"], "|cFF00FF00", value))
-	f.ReportUncollected:SetChecked(DataStore:GetOption(addonName, "ReportUncollected"))
+	local options = DataStore_Garrisons_Options
+	local level = options.ReportLevel
+	
+	DataStoreGarrisonsOptions_SliderReportLevel:SetValue(level)
+	DataStoreGarrisonsOptions_SliderReportLevelText:SetText(format(L["REPORT_LEVEL_LABEL"], "|cFF00FF00", level))
+	f.ReportUncollected:SetChecked(options.ReportUncollected)
 end

@@ -1,5 +1,5 @@
-local L = LibStub("AceLocale-3.0"):NewLocale( "DataStore_Garrisons", "deDE" )
-
+local addonName = ...
+local L = DataStore:SetLocale(addonName, "deDE")
 if not L then return end
 
 L["REPORT_LEVEL_LABEL"] = "Berichte ab %s%s"
@@ -9,4 +9,3 @@ L["REPORT_UNCOLLECTED_ENABLED"] = "Beim Anmelden werden Spielfiguren mit mehr al
 L["REPORT_UNCOLLECTED_LABEL"] = "Berichte nicht eingezogene Ressourcen"
 L["REPORT_UNCOLLECTED_TITLE"] = "Berichte nicht eingezogene Ressourcen"
 L["UNCOLLECTED_RESOURCES_ALERT"] = "%s hat %s Resourcen nicht eingezogen"
-
