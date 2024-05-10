@@ -108,12 +108,7 @@ local function SetMissionInfo(mission)
 	-- expiration ??
 end
 
-local function GetMissionDuration(missionID)
-	local info = missionInfos.Infos[missionID]
-	local durationID = bit64:GetBits(info, 12, 6)		-- bits 12-17 = duration index (6 bits)
-	
-	return missionInfos.Durations.Set[durationID]
-end
+
 
 
 -- *** Scanning functions ***
@@ -127,11 +122,18 @@ local function ScanAvailableMissions(followerType, index)
 		-- free space if no data
 		if thisCharacter.Available then
 			thisCharacter.Available[index] = nil
-			thisCharacter.Available = #thisCharacter.Available == 0 and nil
+		
+			if #thisCharacter.Available == 0 then
+				thisCharacter.Available = nil
+			end
 		end
 		
 		return
 	end
+	
+	-- allocate space for mission data
+	thisCharacter.Available = thisCharacter.Available or {}
+	thisCharacter.Available[index] = thisCharacter.Available[index] or {}
 	
 	local missions = thisCharacter.Available[index]
 	wipe(missions)
@@ -164,7 +166,10 @@ local function ScanActiveMissions(followerType, index)
 		-- free space if no data
 		if thisCharacter.Active then
 			thisCharacter.Active[index] = nil
-			thisCharacter.Active = #thisCharacter.Active == 0 and nil
+			
+			if #thisCharacter.Active == 0 then
+				thisCharacter.Active = nil
+			end
 		end
 		
 		return
@@ -280,6 +285,39 @@ end
 
 
 -- ** Mixins **
+local function _GetMissionCost(missionID)
+	local info = missionInfos.Infos[missionID]
+	local cost = bit64:GetBits(info, 18, 12)		-- bits 18-29 = mission cost (12 bits)
+
+	return cost
+end
+
+local function _GetMissionLevel(missionID)
+	local info = missionInfos.Infos[missionID]
+	local level = bit64:GetBits(info, 30, 6)		-- bits 30-35 = mission level (6 bits)
+	local iLevel = bit64:GetBits(info, 36, 10)	-- bits 36-45 = mission iLevel (10 bits)
+
+	return level, iLevel
+end
+
+local function _GetMissionAtlas(missionID)
+	local info = missionInfos.Infos[missionID]
+	local id = bit64:GetBits(info, 6, 6)		-- bits 6-11 = mission type atlas index (6 bits)
+
+	return missionInfos.TypeAtlas.List[id]
+end
+
+local function _GetMissionDuration(missionID)
+	local info = missionInfos.Infos[missionID]
+	local id = bit64:GetBits(info, 12, 6)		-- bits 12-17 = duration index (6 bits)
+
+	return missionInfos.Durations.List[id]
+end
+
+local function _GetMissionRewards(missionID)
+	return missionInfos.Rewards[missionID]
+end
+
 local function _GetAvailableMissions(character, followerType)
 	return character.Available and character.Available[GetStorageIndex(followerType)]
 end
@@ -299,16 +337,16 @@ local function _GetNumActiveMissions(character, followerType)
 end
 
 local function _GetActiveMissionInfo(character, id)
-	if not character.MissionsInfo then return end
+	if not character.Infos then return end
 	
-	local mission = character.MissionsInfo[id]
+	local mission = character.Infos[id]
 	if not mission then return end
 	
 	local startTime = character.StartTimes and character.StartTimes[id]
 	local remainingTime
 	
 	if startTime then
-		remainingTime = GetMissionDuration(id) - (time() - startTime)
+		remainingTime = _GetMissionDuration(id) - (time() - startTime)
 		remainingTime = (remainingTime > 0) and remainingTime or 0
 	end
 	
@@ -324,6 +362,7 @@ local function _GetNumCompletedMissions(character, followerType)
 	if missions then
 		for _, id in pairs(missions) do
 			local _, remainingTime = _GetActiveMissionInfo(character, id)
+			
 			if remainingTime and remainingTime == 0 then
 				count = count + 1
 			end
@@ -331,6 +370,11 @@ local function _GetNumCompletedMissions(character, followerType)
 	end
 	
 	return count
+end
+
+local function _GetMissionInfo(missionID)
+	return missionInfos[missionID]
+	
 end
 
 
@@ -372,7 +416,12 @@ DataStore:OnAddonLoaded(addonName, function()
 	DataStore:CreateSetAndList(missionInfos.TypeAtlas)
 	DataStore:CreateSetAndList(missionInfos.Durations)
 	
-	DataStore:RegisterMethod(addon, "GetMissionInfo", function(missionID) return missionInfos[missionID] end)
+	DataStore:RegisterMethod(addon, "GetMissionCost", _GetMissionCost)
+	DataStore:RegisterMethod(addon, "GetMissionLevel", _GetMissionLevel)
+	DataStore:RegisterMethod(addon, "GetMissionAtlas", _GetMissionAtlas)
+	DataStore:RegisterMethod(addon, "GetMissionDuration", _GetMissionDuration)
+	DataStore:RegisterMethod(addon, "GetMissionRewards", _GetMissionRewards)
+
 end)
 
 DataStore:OnPlayerLogin(function()

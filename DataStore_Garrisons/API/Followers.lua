@@ -264,6 +264,18 @@ local function _GetFollowerLink(character, id)
 	return character.FollowerLinks[id]
 end
 
+local function GetInfo(character, from, length)
+	return character.Infos
+		and bit64:GetBits(character.Infos, from, length)
+		or 0
+end
+
+local function GetCount(character, from, length)
+	return character.LevelCount
+		and bit64:GetBits(character.LevelCount, from, length)
+		or 0
+end
+
 
 DataStore:OnAddonLoaded(addonName, function() 
 	DataStore:RegisterTables({
@@ -278,18 +290,18 @@ DataStore:OnAddonLoaded(addonName, function()
 				GetFollowerLink = _GetFollowerLink,
 				GetFollowerSpellCounters = _GetFollowerSpellCounters,
 			
-				GetNumFollowers = function(character) return bit64:GetBits(character.Infos, 0, 8) or 0 end,
-				GetNumRareFollowers = function(character) return bit64:GetBits(character.Infos, 8, 8) or 0 end,
-				GetNumEpicFollowers = function(character) return bit64:GetBits(character.Infos, 16, 8) or 0 end,
-				GetAvgWeaponiLevel = function(character) return bit64:GetBits(character.Infos, 24, 10) or 0 end,
-				GetAvgArmoriLevel = function(character) return bit64:GetBits(character.Infos, 34, 10) or 0 end,
+				GetNumFollowers = function(character) return GetInfo(character, 0, 8) end,
+				GetNumRareFollowers = function(character) return GetInfo(character, 8, 8) end,
+				GetNumEpicFollowers = function(character) return GetInfo(character, 16, 8) end,
+				GetAvgWeaponiLevel = function(character) return GetInfo(character, 24, 10) end,
+				GetAvgArmoriLevel = function(character) return GetInfo(character, 34, 10) end,
 				
-				GetNumFollowersAtLevel40 = function(character) return bit64:GetBits(character.LevelCount, 0, 8) or 0 end,
-				GetNumFollowersAtiLevel615 = function(character) return bit64:GetBits(character.LevelCount, 8, 8) or 0 end,
-				GetNumFollowersAtiLevel630 = function(character) return bit64:GetBits(character.LevelCount, 16, 8) or 0 end,
-				GetNumFollowersAtiLevel645 = function(character) return bit64:GetBits(character.LevelCount, 24, 8) or 0 end,
-				GetNumFollowersAtiLevel660 = function(character) return bit64:GetBits(character.LevelCount, 32, 8) or 0 end,
-				GetNumFollowersAtiLevel675 = function(character) return bit64:GetBits(character.LevelCount, 40, 8) or 0 end,
+				GetNumFollowersAtLevel40 = function(character) return GetCount(character, 0, 8) end,
+				GetNumFollowersAtiLevel615 = function(character) return GetCount(character, 8, 8) end,
+				GetNumFollowersAtiLevel630 = function(character) return GetCount(character, 16, 8) end,
+				GetNumFollowersAtiLevel645 = function(character) return GetCount(character, 24, 8) end,
+				GetNumFollowersAtiLevel660 = function(character) return GetCount(character, 32, 8) end,
+				GetNumFollowersAtiLevel675 = function(character) return GetCount(character, 40, 8) end,
 				
 			},
 		}

@@ -80,9 +80,10 @@ DataStore:OnAddonLoaded(addonName, function()
 end)
 
 DataStore:OnPlayerLogin(function()
-	options = DataStore_Garrisons_Options
-	options.ReportUncollected = options.ReportUncollected or true		-- Report uncollected resources
-	options.ReportLevel = options.ReportLevel or 400
+	options = DataStore:SetDefaults("DataStore_Garrisons_Options", {
+		ReportUncollected = true,		-- Report uncollected resources
+		ReportLevel = 400,
+	})
 	
 	-- Resources
 	addon:ListenTo("SHOW_LOOT_TOAST", OnShowLootToast)
