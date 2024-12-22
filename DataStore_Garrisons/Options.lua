@@ -8,7 +8,7 @@ function addon:SetupOptions()
 	DataStore:AddOptionCategory(f, addonName, "DataStore")
 
 	-- localize options
-	local L = DataStore:GetLocale(addonName)
+	local L = AddonFactory:GetLocale(addonName)
 	
 	DataStoreGarrisonsOptions_SliderReportLevel.tooltipText = L["REPORT_LEVEL_TOOLTIP"]
 	DataStoreGarrisonsOptions_SliderReportLevelLow:SetText("350")

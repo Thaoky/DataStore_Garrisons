@@ -1,5 +1,5 @@
 local addonName = ...
-local L = DataStore:SetLocale(addonName, "esES")
+local L = AddonFactory:SetLocale(addonName, "esES")
 if not L then return end
 
 L["REPORT_LEVEL_LABEL"] = "Reportar en %s%s"

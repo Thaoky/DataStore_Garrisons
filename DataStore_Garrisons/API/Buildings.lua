@@ -47,7 +47,7 @@ local function ScanBuildings()
 	end
 end
 
-DataStore:OnAddonLoaded(addonName, function() 
+AddonFactory:OnAddonLoaded(addonName, function() 
 	DataStore:RegisterTables({
 		addon = addon,
 		characterTables = {
@@ -67,12 +67,12 @@ DataStore:OnAddonLoaded(addonName, function()
 	thisCharacter = DataStore:GetCharacterDB("DataStore_Garrisons_Buildings", true)
 end)
 
-DataStore:OnAddonLoaded("Blizzard_GarrisonUI", function() 
+AddonFactory:OnAddonLoaded("Blizzard_GarrisonUI", function() 
 	ScanBuildings()
 	-- ScanFollowers()	-- Seems this scan can cause the values to be zeroed out.
 end)
 
-DataStore:OnPlayerLogin(function()
+AddonFactory:OnPlayerLogin(function()
 	addon:ListenTo("GARRISON_BUILDING_ACTIVATED", ScanBuildings)
 	addon:ListenTo("GARRISON_BUILDING_UPDATE", ScanBuildings)
 	addon:ListenTo("GARRISON_BUILDING_REMOVED", ScanBuildings)

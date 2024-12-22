@@ -51,7 +51,7 @@ local function GetLevel(characterID, bitNum)
 	return info and bit64:GetBits(info, bitNum, 4) or 0
 end
 
-DataStore:OnAddonLoaded(addonName, function() 
+AddonFactory:OnAddonLoaded(addonName, function() 
 	DataStore:RegisterTables({
 		addon = addon,
 		characterIdTables = {
@@ -68,7 +68,7 @@ DataStore:OnAddonLoaded(addonName, function()
 	equipment = DataStore_Garrisons_CypherEquipment
 end)
 
-DataStore:OnPlayerLogin(function()
+AddonFactory:OnPlayerLogin(function()
 	addon:ListenTo("GARRISON_TALENT_NPC_OPENED", ScanCypherEquipment)
 	addon:ListenTo("GARRISON_TALENT_COMPLETE", ScanCypherEquipment)
 	addon:ListenTo("GARRISON_TALENT_UPDATE", ScanCypherEquipment)

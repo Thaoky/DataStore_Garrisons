@@ -277,7 +277,7 @@ local function GetCount(character, from, length)
 end
 
 
-DataStore:OnAddonLoaded(addonName, function() 
+AddonFactory:OnAddonLoaded(addonName, function() 
 	DataStore:RegisterTables({
 		addon = addon,
 		rawTables = {
@@ -321,7 +321,7 @@ DataStore:OnAddonLoaded(addonName, function()
 	DataStore:RegisterMethod(addon, "GetFollowerID", function(name) return followerNamesToID[name] end)
 end)
 
-DataStore:OnPlayerLogin(function()
+AddonFactory:OnPlayerLogin(function()
 	addon:ListenTo("GARRISON_FOLLOWER_ADDED", OnFollowerAdded)
 	addon:ListenTo("GARRISON_FOLLOWER_LIST_UPDATE", OnFollowerListUpdate)
 	addon:ListenTo("GARRISON_FOLLOWER_REMOVED", OnFollowerRemoved)

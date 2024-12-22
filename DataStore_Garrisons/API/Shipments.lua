@@ -59,7 +59,7 @@ local function _GetArtifactResearchInfo(character)
 end
 
 
-DataStore:OnAddonLoaded(addonName, function() 
+AddonFactory:OnAddonLoaded(addonName, function() 
 	DataStore:RegisterTables({
 		addon = addon,
 		characterTables = {
@@ -72,7 +72,7 @@ DataStore:OnAddonLoaded(addonName, function()
 	thisCharacter = DataStore:GetCharacterDB("DataStore_Garrisons_Shipments", true)
 end)
 
-DataStore:OnPlayerLogin(function()
+AddonFactory:OnPlayerLogin(function()
 	-- Shipments
 	addon:ListenTo("GARRISON_LANDINGPAGE_SHIPMENTS", ScanNextArtifactResearch)
 end)

@@ -378,7 +378,7 @@ local function _GetMissionInfo(missionID)
 end
 
 
-DataStore:OnAddonLoaded(addonName, function() 
+AddonFactory:OnAddonLoaded(addonName, function() 
 	DataStore:RegisterTables({
 		addon = addon,
 		rawTables = {
@@ -424,7 +424,7 @@ DataStore:OnAddonLoaded(addonName, function()
 
 end)
 
-DataStore:OnPlayerLogin(function()
+AddonFactory:OnPlayerLogin(function()
 	C_Timer.After(3, function()
 			-- To avoid the long list of GARRISON_MISSION_LIST_UPDATE at startup, make the initial scan 3 seconds later ..
 			ScanAllAvailableMissions()

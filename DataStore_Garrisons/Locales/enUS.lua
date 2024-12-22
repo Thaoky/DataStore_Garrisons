@@ -1,5 +1,5 @@
 local addonName = ...
-local L = DataStore:SetDefaultLocale(addonName, "enUS")
+local L = AddonFactory:SetDefaultLocale(addonName, "enUS")
 
 L["REPORT_LEVEL_LABEL"] = "Report at %s%s"
 L["REPORT_LEVEL_TOOLTIP"] = "Report when the level of uncollected resources is higher than this value"

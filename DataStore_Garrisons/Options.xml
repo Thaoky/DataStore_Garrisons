@@ -27,7 +27,7 @@
 				</Anchors>
 				<Scripts>
 					<OnValueChanged>
-						local L = DataStore:GetLocale("DataStore_Garrisons")
+						local L = AddonFactory:GetLocale("DataStore_Garrisons")
 						
 						local name = self:GetName()
 						local value = math.floor(self:GetValue())

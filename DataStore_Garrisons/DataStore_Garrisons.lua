@@ -8,7 +8,7 @@ local addonName, addon = ...
 local thisCharacter
 local allCharacters
 
-local L = DataStore:GetLocale(addonName)
+local L = AddonFactory:GetLocale(addonName)
 
 -- *** Utility functions ***
 local function GetNumUncollectedResources(from)
@@ -58,7 +58,7 @@ local function OnShowLootToast(event, lootType, link, quantity, specID, sex, isP
 	end
 end
 
-DataStore:OnAddonLoaded(addonName, function()
+AddonFactory:OnAddonLoaded(addonName, function()
 	DataStore:RegisterModule({
 		addon = addon,
 		addonName = addonName,
@@ -79,7 +79,7 @@ DataStore:OnAddonLoaded(addonName, function()
 	allCharacters = DataStore_Garrisons_Characters
 end)
 
-DataStore:OnPlayerLogin(function()
+AddonFactory:OnPlayerLogin(function()
 	options = DataStore:SetDefaults("DataStore_Garrisons_Options", {
 		ReportUncollected = true,		-- Report uncollected resources
 		ReportLevel = 400,

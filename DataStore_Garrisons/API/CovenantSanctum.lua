@@ -76,7 +76,7 @@ local function OnCovenantSanctumInteractionStarted(event, interactionType)
 end
 
 
-DataStore:OnAddonLoaded(addonName, function() 
+AddonFactory:OnAddonLoaded(addonName, function() 
 	DataStore:RegisterTables({
 		addon = addon,
 		characterIdTables = {
@@ -103,7 +103,7 @@ DataStore:OnAddonLoaded(addonName, function()
 	sanctum = DataStore_Garrisons_CovenantSanctum
 end)
 
-DataStore:OnPlayerLogin(function()
+AddonFactory:OnPlayerLogin(function()
 	addon:ListenTo("PLAYER_INTERACTION_MANAGER_FRAME_SHOW", OnCovenantSanctumInteractionStarted)
 	addon:ListenTo("GARRISON_TALENT_RESEARCH_STARTED", OnCovenantSanctumInteractionStarted)
 end)
