@@ -32,7 +32,10 @@
 						local name = self:GetName()
 						local value = math.floor(self:GetValue())
 						_G[name .. "Text"]:SetText(format(L["REPORT_LEVEL_LABEL"], "|cFF00FF00", value))
-						DataStore:SetOption("DataStore_Garrisons", "ReportLevel", value)
+						
+						if DataStore_Garrisons_Options then
+							DataStore_Garrisons_Options.ReportLevel = value
+						end
 					</OnValueChanged>
 				</Scripts>
 			</Slider>

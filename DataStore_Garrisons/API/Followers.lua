@@ -153,7 +153,7 @@ local function ScanFollowers()
 	thisCharacter.AbilityCounters = counters
 	thisCharacter.lastUpdate = time()
 	
-	DataStore:Broadcast("DATASTORE_GARRISON_FOLLOWERS_UPDATED")
+	AddonFactory:Broadcast("DATASTORE_GARRISON_FOLLOWERS_UPDATED")
 	
 	wipe(abilities)
 	wipe(traits)
