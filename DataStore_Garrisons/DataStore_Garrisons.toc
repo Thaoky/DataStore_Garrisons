@@ -1,10 +1,10 @@
-## Interface: 110200
+## Interface: 110205
 ## Title: DataStore_Garrisons
 ## IconTexture: Interface\Icons\garrison_building_storehouse
 
 ## Notes: Stores information about garrisons and followers
 ## Author: Thaoky (EU-Marécages de Zangar)
-## Version: 2025.08.21
+## Version: 2025.10.19
 ## Dependencies: AddonFactory, DataStore
 ## SavedVariables: DataStore_Garrisons_Characters, DataStore_Garrisons_Missions, DataStore_Garrisons_MissionInfos, DataStore_Garrisons_Followers, DataStore_Garrisons_FollowerNamesToID, DataStore_Garrisons_Buildings, DataStore_Garrisons_CovenantSanctum, DataStore_Garrisons_CypherEquipment, DataStore_Garrisons_Shipments, DataStore_Garrisons_Options
 ## X-Category: Interface Enhancements
