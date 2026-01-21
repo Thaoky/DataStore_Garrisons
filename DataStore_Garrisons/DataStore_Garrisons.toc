@@ -1,4 +1,4 @@
-## Interface: 110205
+## Interface: 120000
 ## Title: DataStore_Garrisons
 ## IconTexture: Interface\Icons\garrison_building_storehouse
 
@@ -8,6 +8,18 @@
 ## Dependencies: AddonFactory, DataStore
 ## SavedVariables: DataStore_Garrisons_Characters, DataStore_Garrisons_Missions, DataStore_Garrisons_MissionInfos, DataStore_Garrisons_Followers, DataStore_Garrisons_FollowerNamesToID, DataStore_Garrisons_Buildings, DataStore_Garrisons_CovenantSanctum, DataStore_Garrisons_CypherEquipment, DataStore_Garrisons_Shipments, DataStore_Garrisons_Options
 ## X-Category: Interface Enhancements
+
+## Category: Libraries
+## Category-deDE: Bibliotheken
+## Category-esES: Bibliotecas
+## Category-esMX: Bibliotecas
+## Category-frFR: Bibliothèques
+## Category-itIT: Librerie
+## Category-koKR: 라이브러리
+## Category-ptBR: Bibliotecas
+## Category-ruRU: Библиотеки
+## Category-zhCN: 函数库
+## Category-zhTW: 函式庫
 
 locale.xml
 
