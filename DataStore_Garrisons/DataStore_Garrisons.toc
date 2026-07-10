@@ -4,7 +4,7 @@
 
 ## Notes: Stores information about garrisons and followers
 ## Author: Thaoky (EU-Marécages de Zangar)
-## Version: 2026.07.06
+## Version: 2026.07.10
 ## Dependencies: AddonFactory, DataStore
 ## SavedVariables: DataStore_Garrisons_Characters, DataStore_Garrisons_Missions, DataStore_Garrisons_MissionInfos, DataStore_Garrisons_Followers, DataStore_Garrisons_FollowerNamesToID, DataStore_Garrisons_Buildings, DataStore_Garrisons_CovenantSanctum, DataStore_Garrisons_CypherEquipment, DataStore_Garrisons_Shipments, DataStore_Garrisons_Options
 ## X-Category: Interface Enhancements
