@@ -21,6 +21,7 @@ local function AddBuilding(internalID, rank, buildingID)
 end
 
 local function ScanBuildings()
+	if not C_Garrison then return end
 	local plots = C_Garrison.GetPlots(FOLLOWER_TYPE)
 
 	-- to avoid deleting previously saved data when the game is not ready to deliver information
