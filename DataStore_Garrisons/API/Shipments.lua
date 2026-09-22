@@ -6,7 +6,7 @@
 local addonName, addon = ...
 local thisCharacter
 
-local DataStore, pairs, C_Garrison = DataStore, pairs, C_Garrison
+local DataStore, pairs, C_Garrison, C_Item = DataStore, pairs, C_Garrison, C_Item
 
 local bit64 = LibStub("LibBit64")
 
@@ -26,7 +26,7 @@ local function ScanNextArtifactResearch()
 	for i = 1, #shipments do
 		local name, _, _, numReady, numTotal, creationTime, duration = C_Garrison.GetLandingPageShipmentInfoByContainerID(shipments[i])
 		
-		if name == GetItemInfo(139390) and creationTime then		-- the name must be "Artifact Research Notes"
+		if name == C_Item.GetItemInfo(139390) and creationTime then		-- the name must be "Artifact Research Notes"
 			char.artifactResearchCreationTime = creationTime
 			char.artifactResearchDuration = duration
 			char.artifactResearchNumReady = numReady
