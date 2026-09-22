@@ -42,7 +42,8 @@ end
 
 -- *** Scanning functions ***
 local function ScanFollowers()
-	local followersList = C_Garrison.GetFollowers(Enum.GarrisonFollowerType.FollowerType_6_0_GarrisonFollower)
+	if not C_Garrison then return end
+	local followersList = nil; if C_Garrison and C_Garrison.GetFollowers then local ok, list = pcall(C_Garrison.GetFollowers, Enum.GarrisonFollowerType.FollowerType_6_0_GarrisonFollower); if ok then followersList = list end end; if not followersList then return end
 	if not followersList then return end
 
 	local followers = thisCharacter.Followers
@@ -161,7 +162,7 @@ local function ScanFollowers()
 end
 
 local function ScanOrderHallFollowers()
-	local followersList = C_Garrison.GetFollowers(Enum.GarrisonFollowerType.FollowerType_7_0_GarrisonFollower)
+	local followersList = nil; if C_Garrison and C_Garrison.GetFollowers then local ok, list = pcall(C_Garrison.GetFollowers, Enum.GarrisonFollowerType.FollowerType_7_0_GarrisonFollower); if ok then followersList = list end end; if not followersList then return end
 	if not followersList then return end
 
 	local followers = thisCharacter.Followers
